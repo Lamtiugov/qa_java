@@ -14,7 +14,7 @@ import java.util.Objects;
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
-public class CatTest {
+public class CatTests {
 
     @Spy
     Feline feline = new Feline();
