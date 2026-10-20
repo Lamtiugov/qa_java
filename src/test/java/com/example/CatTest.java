@@ -21,14 +21,14 @@ public class CatTest {
 
     @Description("Метод getSound должен возвращать Мяу")
     @Test
-    void getSoundMyau() {
+    void testGetSoundMyau() {
         Cat cat = new Cat(this.feline);
         assertEquals("Мяу", cat.getSound(), "Кошка должна говорить Мяу");
     }
 
     @Description("Метод getFood. Проверяем, что вызывается реализация eatMeat из Feline")
     @Test
-    void getFoodCallsEatMeatFromFeline() throws Exception {
+    void testGetFoodCallsEatMeatFromFeline() throws Exception {
         Cat cat = new Cat(this.feline);
         cat.getFood();
         Mockito.verify(feline, Mockito.times(1)).eatMeat();
@@ -36,7 +36,7 @@ public class CatTest {
 
     @Description("Метод getFood. Проверяем, что не вылетает исключение из getFood")
     @Test
-    void getFoodCDoesNotThrowException() {
+    void testGetFoodCDoesNotThrowException() {
         Cat cat = new Cat(this.feline);
         Executable executable = cat::getFood;
         assertDoesNotThrow(executable, "Не должно вылетать исключение");
