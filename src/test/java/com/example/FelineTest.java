@@ -1,8 +1,10 @@
 package com.example;
 
 import jdk.jfr.Description;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
+import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
 import org.mockito.Mock;
@@ -20,9 +22,6 @@ public class FelineTest {
     @Spy
     private Feline feline;
 
-    @Spy
-    private Animal animal;
-
     @Description("Метод getFamily. Позитивный тест для результата Кошачьи")
     @Test
     void testGetFamilyKoshachyResultKoshachy(){
@@ -32,14 +31,22 @@ public class FelineTest {
         assertEquals(expected, actual, "Ожидается Кошачьи.");
     }
 
-    @Description("Метод eatMeat. Рацион хищника: [Животные, Птицы, Рыба]")
+    @Description("Метод eatMeat. Проверяем, что вызывается метод Animal::getFood")
     @Test
-    void eatMeatPredatorFoodResult() throws Exception {
-        List<String> foodList = this.animal.getFood("Хищник");
-        Mockito.verify(this.animal, Mockito.times(1)).getFood("Хищник");
+    void testEatMeatCallsAnimalFood() throws Exception {
+        this.feline.eatMeat();
+        Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
     }
 
-    @Description("Метод getKittens(int). Позитивный тест")
+    @Description("Метод eatMeat. Проверяем, что не вылетает исключение из eatMeat")
+    @Test
+    void testEatMeatDoesNotThrowException() {
+        Feline feline = new Feline();
+        Executable executable = feline::eatMeat;
+        assertDoesNotThrow(executable, "Не должно вылетать исключение.");
+    }
+
+    @Description("Метод getKittens(int). Тест на разные значения.")
     @ParameterizedTest
     @ValueSource(ints = {1, Integer.MAX_VALUE, Integer.MIN_VALUE, 0})
     void testGetKittensIntResultTrue(int kittensCount) {
@@ -48,6 +55,7 @@ public class FelineTest {
         assertEquals(kittensCount, actual, "Ожидается: " + kittensCount);
     }
 
+    @Description("Метод getKittens на самом деле вызывает getKittens(1)")
     @Test
     void testGetKittensWithoutParams() {
         this.feline.getKittens();
