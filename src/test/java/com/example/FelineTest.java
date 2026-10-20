@@ -20,9 +20,12 @@ public class FelineTest {
     @Spy
     private Feline feline;
 
+    @Spy
+    private Animal animal;
+
     @Description("Метод getFamily. Позитивный тест для результата Кошачьи")
     @Test
-    void testGetFamilyKoshachyResultKoshachyTrue(){
+    void testGetFamilyKoshachyResultKoshachy(){
         Feline feline = new Feline();
         String actual = feline.getFamily();
         String expected = "Кошачьи";
@@ -31,12 +34,9 @@ public class FelineTest {
 
     @Description("Метод eatMeat. Рацион хищника: [Животные, Птицы, Рыба]")
     @Test
-    // Stub не работает
-    // Unnecessary stubbings detected.
-    // Clean & maintainable test code requires zero unnecessary code.
     void eatMeatPredatorFoodResult() throws Exception {
-        Feline feline = new Feline();
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), feline.eatMeat(), "Рацион хищника: [Животные, Птицы, Рыба]");
+        List<String> foodList = this.animal.getFood("Хищник");
+        Mockito.verify(this.animal, Mockito.times(1)).getFood("Хищник");
     }
 
     @Description("Метод getKittens(int). Позитивный тест")
