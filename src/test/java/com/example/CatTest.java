@@ -19,7 +19,7 @@ public class CatTest {
     @Spy
     Feline feline = new Feline();
 
-    @Description("Метод getSound. Позитивный тест.")
+    @Description("Метод getSound должен возвращать Мяу")
     @Test
     void getSoundMyau() {
         Cat cat = new Cat(this.feline);
@@ -39,7 +39,7 @@ public class CatTest {
     void getFoodCDoesNotThrowException() {
         Cat cat = new Cat(this.feline);
         Executable executable = cat::getFood;
-        assertDoesNotThrow(executable, "Не должно вылетать исключение.");
+        assertDoesNotThrow(executable, "Не должно вылетать исключение");
     }
 
     @Description("Метод getFood. Список еды не должен быть null")
