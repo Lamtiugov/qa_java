@@ -1,18 +1,17 @@
 package com.example;
 
 import jdk.jfr.Description;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.api.function.Executable;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.ValueSource;
-import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
 import java.util.List;
+import java.util.Objects;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -28,14 +27,22 @@ public class FelineTest {
         Feline feline = new Feline();
         String actual = feline.getFamily();
         String expected = "Кошачьи";
-        assertEquals(expected, actual, "Ожидается Кошачьи.");
+        assertEquals(expected, actual, "Ожидается Кошачьи");
     }
 
     @Description("Метод eatMeat. Проверяем, что вызывается метод Animal::getFood")
     @Test
     void testEatMeatCallsAnimalFood() throws Exception {
         this.feline.eatMeat();
-        Mockito.verify(feline, Mockito.times(1)).getFood("Хищник");
+        Mockito.verify(this.feline, Mockito.times(1)).getFood("Хищник");
+    }
+
+    @Description("Метод eatMeat. Список еды не должен быть null")
+    @Test
+    void testEatMeatNotNullReturn() throws Exception {
+        Feline feline = new Feline();
+        List<String> foods = feline.eatMeat();
+        assertTrue(Objects.nonNull(foods), "Список еды не должен быть null");
     }
 
     @Description("Метод eatMeat. Проверяем, что не вылетает исключение из eatMeat")
@@ -43,7 +50,7 @@ public class FelineTest {
     void testEatMeatDoesNotThrowException() {
         Feline feline = new Feline();
         Executable executable = feline::eatMeat;
-        assertDoesNotThrow(executable, "Не должно вылетать исключение.");
+        assertDoesNotThrow(executable, "Не должно вылетать исключение");
     }
 
     @Description("Метод getKittens(int). Тест на разные значения.")
