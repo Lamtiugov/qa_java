@@ -8,13 +8,13 @@ import org.mockito.Mockito;
 import org.mockito.Spy;
 import org.mockito.junit.jupiter.MockitoExtension;
 
+import java.util.List;
+import java.util.Objects;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 @ExtendWith(MockitoExtension.class)
 public class CatTest {
-
-    @Spy
-    Predator predator;
 
     @Spy
     Feline feline = new Feline();
@@ -34,11 +34,19 @@ public class CatTest {
         Mockito.verify(feline, Mockito.times(1)).eatMeat();
     }
 
-    @Description("Метод getFood. Проверяем, что не вылетает исключение из eatMeat")
+    @Description("Метод getFood. Проверяем, что не вылетает исключение из getFood")
     @Test
     void getFoodCDoesNotThrowException() {
         Cat cat = new Cat(this.feline);
         Executable executable = cat::getFood;
         assertDoesNotThrow(executable, "Не должно вылетать исключение.");
+    }
+
+    @Description("Метод getFood. Список еды не должен быть null")
+    @Test
+    void testGetFoodNotNullReturn() throws Exception {
+        Cat cat = new Cat(this.feline);
+        List<String> foods = cat.getFood();
+        assertTrue(Objects.nonNull(foods), "Список еды не должен быть null");
     }
 }
