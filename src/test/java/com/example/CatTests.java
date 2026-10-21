@@ -17,7 +17,7 @@ import static org.junit.jupiter.api.Assertions.*;
 public class CatTests {
 
     @Spy
-    Feline feline = new Feline();
+    private Feline feline;
 
     @Description("Метод getSound должен возвращать Мяу")
     @Test
