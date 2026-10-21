@@ -56,6 +56,7 @@ class LionTests {
     @Test
     void testGetKittensCallsFelineGetKittensWithoutParams() throws Exception {
         Lion lion = new Lion("Самец", this.feline);
+        lion.getKittens();
         Mockito.verify(this.feline, Mockito.times(1)).getKittens();
     }
 
