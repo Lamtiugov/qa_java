@@ -1,6 +1,5 @@
 package com.example;
 
-import java.awt.*;
 import java.util.List;
 
 public class LionAlex extends Lion {
