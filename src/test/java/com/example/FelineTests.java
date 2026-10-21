@@ -21,7 +21,7 @@ public class FelineTests {
     @Spy
     private Feline feline;
 
-    @Description("Метод getFamily. Позитивный тест для результата Кошачьи")
+    @Description("getFamily должен вернуть Кошачьи")
     @Test
     void testGetFamilyKoshachyResultKoshachy(){
         Feline feline = new Feline();
@@ -30,14 +30,14 @@ public class FelineTests {
         assertEquals(expected, actual, "Ожидается Кошачьи");
     }
 
-    @Description("Метод eatMeat. Проверяем, что вызывается метод Animal::getFood")
+    @Description("eatMeat вызывает метод Animal::getFood()")
     @Test
     void testEatMeatCallsAnimalFood() throws Exception {
         this.feline.eatMeat();
         Mockito.verify(this.feline, Mockito.times(1)).getFood("Хищник");
     }
 
-    @Description("Метод eatMeat. Список еды не должен быть null")
+    @Description("eatMeat должен возвращать не null")
     @Test
     void testEatMeatNotNullReturn() throws Exception {
         Feline feline = new Feline();
@@ -45,7 +45,7 @@ public class FelineTests {
         assertTrue(Objects.nonNull(foods), "Список еды не должен быть null");
     }
 
-    @Description("Метод eatMeat. Проверяем, что не вылетает исключение из eatMeat")
+    @Description("eatMeat не должен кидать исключение")
     @Test
     void testEatMeatDoesNotThrowException() {
         Feline feline = new Feline();
@@ -53,7 +53,7 @@ public class FelineTests {
         assertDoesNotThrow(executable, "Не должно вылетать исключение");
     }
 
-    @Description("Метод getKittens(int). Тест на разные значения.")
+    @Description("getKittens(int). Тест на разные значения.")
     @ParameterizedTest
     @ValueSource(ints = {1, Integer.MAX_VALUE, Integer.MIN_VALUE, 0})
     void testGetKittensIntResultTrue(int kittensCount) {
@@ -62,7 +62,7 @@ public class FelineTests {
         assertEquals(kittensCount, actual, "Ожидается: " + kittensCount);
     }
 
-    @Description("Метод getKittens на самом деле вызывает getKittens(1)")
+    @Description("getKittens на самом деле вызывает getKittens(1)")
     @Test
     void testGetKittensWithoutParams() {
         this.feline.getKittens();
