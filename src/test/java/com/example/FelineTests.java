@@ -23,7 +23,7 @@ public class FelineTests {
 
     @Description("getFamily должен вернуть Кошачьи")
     @Test
-    void testGetFamilyKoshachyResultKoshachy(){
+    void getFamilyAlwaysReturnsResultKoshachy(){
         Feline feline = new Feline();
         String actual = feline.getFamily();
         String expected = "Кошачьи";
@@ -32,14 +32,14 @@ public class FelineTests {
 
     @Description("eatMeat вызывает метод Animal::getFood()")
     @Test
-    void testEatMeatCallsAnimalFood() throws Exception {
+    void eatMeatCallsAnimalFood() throws Exception {
         this.feline.eatMeat();
         Mockito.verify(this.feline, Mockito.times(1)).getFood("Хищник");
     }
 
     @Description("eatMeat должен возвращать не null")
     @Test
-    void testEatMeatNotNullReturn() throws Exception {
+    void eatMeatDoesNotReturnsNullList() throws Exception {
         Feline feline = new Feline();
         List<String> foods = feline.eatMeat();
         assertTrue(Objects.nonNull(foods), "Список еды не должен быть null");
@@ -47,7 +47,7 @@ public class FelineTests {
 
     @Description("eatMeat не должен кидать исключение")
     @Test
-    void testEatMeatDoesNotThrowException() {
+    void eatMeatDoesNotThrowException() {
         Feline feline = new Feline();
         Executable executable = feline::eatMeat;
         assertDoesNotThrow(executable, "Не должно вылетать исключение");
@@ -56,7 +56,7 @@ public class FelineTests {
     @Description("getKittens(int). Тест на разные значения.")
     @ParameterizedTest
     @ValueSource(ints = {1, Integer.MAX_VALUE, Integer.MIN_VALUE, 0})
-    void testGetKittensIntResultTrue(int kittensCount) {
+    void getKittensWithIntReturnsSameInt(int kittensCount) {
         Feline feline = new Feline();
         int actual = feline.getKittens(kittensCount);
         assertEquals(kittensCount, actual, "Ожидается: " + kittensCount);
@@ -64,7 +64,7 @@ public class FelineTests {
 
     @Description("getKittens на самом деле вызывает getKittens(1)")
     @Test
-    void testGetKittensWithoutParams() {
+    void getKittensWithoutParamsCallsGetKittenWithOne() {
         this.feline.getKittens();
         Mockito.verify(this.feline, Mockito.times(1)).getKittens(1);
     }

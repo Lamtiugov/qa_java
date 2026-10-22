@@ -19,7 +19,7 @@ public class LionAlexTests {
 
     @Description("Конструктор LionAlex не должен кидать исключения")
     @Test
-    void testLionAlexConstructorDoesNotThrowsException() {
+    void lionAlexConstructorDoesNotThrowException() {
         try {
             LionAlex lionAlex = new LionAlex(feline);
         } catch (Exception exception) {
@@ -30,7 +30,7 @@ public class LionAlexTests {
     @Description("У Алекса три друга — зебра Марти, бегемотиха Глория и жираф Мелман." +
             " Здесь же и проверка на непустой список")
     @Test
-    void doesGetFriendsReturnList() throws Exception {
+    void getFriendsAlwaysReturnsPredefinedListOfFriends() throws Exception {
         LionAlex lionAlex = new LionAlex(feline);
         List<String> actualList = lionAlex.getFriends();
         assertEquals(List.of("Марти", "Глория", "Мелман"), actualList, "Друзья Алекса: Марти, Глория, Мелман");
@@ -38,7 +38,7 @@ public class LionAlexTests {
 
     @Description("Алекс живёт — Нью-Йоркский зоопарк")
     @Test
-    void doesGetPlaceOfLivingIsNewYorkZoo() throws Exception {
+    void getPlaceOfLivingAlwaysReturnsNewYorkZoo() throws Exception {
         LionAlex lionAlex = new LionAlex(feline);
         String actualPlace = lionAlex.getPlaceOfLiving();
         assertEquals("Нью-Йоркский зоопарк", actualPlace, "Алекс живёт — Нью-Йоркский зоопарк");
@@ -46,7 +46,7 @@ public class LionAlexTests {
 
     @Description("У Алекса нет львят")
     @Test
-    void testGetKittensReturnZero() throws Exception {
+    void getKittensAlwaysReturnsZero() throws Exception {
          LionAlex lionAlex = new LionAlex(feline);
         int actualKittens = lionAlex.getKittens();
         assertEquals(0, actualKittens, "У Алекса нет львят");

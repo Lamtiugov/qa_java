@@ -32,7 +32,7 @@ public class LionTests {
             "Самец, true",
             "Самка, false"
     })
-    void testLionConstructorSexParam(String sex, boolean hasMane) {
+    void lionConstructorWithValidSexParamsWorks(String sex, boolean hasMane) {
         try {
             Lion lion = new Lion(sex, felineMock);
             assertEquals(hasMane, lion.hasMane, "Для " + sex + " ожидается hasMane " + hasMane);
@@ -43,7 +43,7 @@ public class LionTests {
 
     @Description("Конструктор класса Lion должен кидать исключение для поля sex == null")
     @Test
-    void testLionConstructorSexIsNullThrowException() {
+    void lionConstructorWithSexNullThrowsException() {
         boolean exceptionTrows = false;
         try {
             Lion lion = new Lion(null, felineMock);
@@ -55,7 +55,7 @@ public class LionTests {
 
     @Description("getKittens вызывает метод Feline.getKittens()")
     @Test
-    void testGetKittensCallsFelineGetKittensWithoutParams() throws Exception {
+    void getKittensCallsFelineGetKittensWithoutParams() throws Exception {
         Lion lion = new Lion("Самец", this.felineSpy);
         lion.getKittens();
         Mockito.verify(this.felineSpy, Mockito.times(1)).getKittens();
@@ -64,7 +64,7 @@ public class LionTests {
     @Description("Метод doesHaveMane должен возвращать значение поля hasMane")
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
-    void testDoesHaveManeReturnsHasManeField(String sex) throws Exception {
+    void haveManeReturnsHasManeField(String sex) throws Exception {
         Lion lion = new Lion(sex, felineMock);
         boolean actualHasMane = lion.doesHaveMane();
         assertEquals(lion.hasMane, actualHasMane, "Ожидалось, что вернет значение поля hasMane");
@@ -72,7 +72,7 @@ public class LionTests {
 
     @Description("getFood() вызывает метод Feline::getFood()")
     @Test
-    void testGetFoodCallsFelineGetFood() throws Exception {
+    void getFoodCallsFelineGetFood() throws Exception {
         Lion lion = new Lion("Самец", this.felineSpy);
         lion.getFood();
         Mockito.verify(this.felineSpy, Mockito.times(1)).getFood("Хищник");
@@ -80,7 +80,7 @@ public class LionTests {
 
     @Description("getFood не должен выдавать исключение")
     @Test
-    void testGetFoodDoesNotThrowsException() {
+    void getFoodDoesNotThrowsException() {
         try {
             Lion lion = new Lion("Самец", felineMock);
             Executable executable = lion::getFood;
@@ -92,13 +92,9 @@ public class LionTests {
 
     @Description("getFood должен вернуть не null")
     @Test
-    void testGetFoodReturnNotNull() throws Exception {
-        try {
-            Lion lion = new Lion("Самец", felineMock);
-            List<String> food = lion.getFood();
-            assertTrue(Objects.nonNull(food), "getFood должен вернуть не null");
-        } catch (Exception e) {
-            fail("Lion не создался с валидным значением Самец");
-        }
+    void getFoodReturnsNotNullList() throws Exception {
+        Lion lion = new Lion("Самец", felineMock);
+        List<String> food = lion.getFood();
+        assertTrue(Objects.nonNull(food), "getFood должен вернуть не null");
     }
 }
