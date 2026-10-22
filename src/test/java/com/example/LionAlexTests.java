@@ -2,17 +2,24 @@ package com.example;
 
 import jdk.jfr.Description;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+@ExtendWith(MockitoExtension.class)
 public class LionAlexTests {
+
+    @Mock
+    Feline feline;
 
     @Description("Конструктор LionAlex не должен кидать исключения")
     @Test
     void testLionAlexConstructorDoesNotThrowsException() {
-        Feline feline = new Feline();
-
         try {
             LionAlex lionAlex = new LionAlex(feline);
         } catch (Exception exception) {
@@ -20,15 +27,28 @@ public class LionAlexTests {
         }
     }
 
+    @Description("У Алекса три друга — зебра Марти, бегемотиха Глория и жираф Мелман." +
+            " Здесь же и проверка на непустой список")
     @Test
-    void getFriends() {
+    void doesGetFriendsReturnList() throws Exception {
+        LionAlex lionAlex = new LionAlex(feline);
+        List<String> actualList = lionAlex.getFriends();
+        assertEquals(List.of("Марти", "Глория", "Мелман"), actualList, "Друзья Алекса: Марти, Глория, Мелман");
     }
 
+    @Description("Алекс живёт — Нью-Йоркский зоопарк")
     @Test
-    void getPlaceOfLiving() {
+    void doesGetPlaceOfLivingIsNewYorkZoo() throws Exception {
+        LionAlex lionAlex = new LionAlex(feline);
+        String actualPlace = lionAlex.getPlaceOfLiving();
+        assertEquals("Нью-Йоркский зоопарк", actualPlace, "Алекс живёт — Нью-Йоркский зоопарк");
     }
 
+    @Description("У Алекса нет львят")
     @Test
-    void getKittens() {
+    void testGetKittensReturnZero() throws Exception {
+        LionAlex lionAlex = new LionAlex(feline);
+        int actualKittens = lionAlex.getKittens();
+        assertEquals(0, actualKittens, "У Алекса нет львят");
     }
 }
