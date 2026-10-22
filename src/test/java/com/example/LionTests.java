@@ -24,7 +24,7 @@ class LionTests {
     private Feline felineSpy;
 
     @Mock
-    Feline felineMock;
+    private Feline felineMock;
 
     @Description("Позитивный тест конструктора класса Lion на поле Sex")
     @ParameterizedTest

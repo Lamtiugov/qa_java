@@ -21,7 +21,7 @@ public class CatTests {
     private Feline felineSpy;
 
     @Mock
-    Feline felineMock;
+    private Feline felineMock;
 
     @Description("Метод getSound должен возвращать Мяу")
     @Test

@@ -15,7 +15,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 public class LionAlexTests {
 
     @Mock
-    Feline feline;
+    private Feline feline;
 
     @Description("Конструктор LionAlex не должен кидать исключения")
     @Test
