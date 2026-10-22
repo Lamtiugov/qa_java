@@ -47,7 +47,7 @@ public class LionAlexTests {
     @Description("У Алекса нет львят")
     @Test
     void testGetKittensReturnZero() throws Exception {
-        LionAlex lionAlex = new LionAlex(feline);
+         LionAlex lionAlex = new LionAlex(feline);
         int actualKittens = lionAlex.getKittens();
         assertEquals(0, actualKittens, "У Алекса нет львят");
     }
