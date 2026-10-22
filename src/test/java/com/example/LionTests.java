@@ -61,7 +61,7 @@ public class LionTests {
         Mockito.verify(this.felineSpy, Mockito.times(1)).getKittens();
     }
 
-    @Description("Метод doesHaveMane должен возвращать значение поля hasMane")
+    @Description("doesHaveMane должен возвращать значение поля hasMane")
     @ParameterizedTest
     @ValueSource(strings = {"Самец", "Самка"})
     void haveManeReturnsHasManeField(String sex) throws Exception {
@@ -70,7 +70,7 @@ public class LionTests {
         assertEquals(lion.hasMane, actualHasMane, "Ожидалось, что вернет значение поля hasMane");
     }
 
-    @Description("getFood() вызывает метод Feline::getFood()")
+    @Description("getFood() на самом деле вызывает метод Feline::getFood()")
     @Test
     void getFoodCallsFelineGetFood() throws Exception {
         Lion lion = new Lion("Самец", this.felineSpy);

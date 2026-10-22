@@ -23,14 +23,14 @@ public class CatTests {
     @Mock
     private Feline felineMock;
 
-    @Description("Метод getSound должен возвращать Мяу")
+    @Description("Кошка всегда говорит Мяу")
     @Test
     void getSoundAlwaysReturnsMyau() {
         Cat cat = new Cat(felineMock);
         assertEquals("Мяу", cat.getSound(), "Кошка должна говорить Мяу");
     }
 
-    @Description("Метод getFood. Проверяем, что вызывается реализация eatMeat из Feline")
+    @Description("getFood на самом деле вызывает eatMeat из Feline")
     @Test
     void getFoodCallsEatMeatFromFeline() throws Exception {
         Cat cat = new Cat(this.felineSpy);
@@ -38,7 +38,7 @@ public class CatTests {
         Mockito.verify(felineSpy, Mockito.times(1)).eatMeat();
     }
 
-    @Description("Метод getFood. Проверяем, что не вылетает исключение из getFood")
+    @Description("Из getFood не должено лететь исключение")
     @Test
     void getFoodDoesNotThrowException() {
         Cat cat = new Cat(felineMock);
@@ -46,7 +46,7 @@ public class CatTests {
         assertDoesNotThrow(executable, "Не должно вылетать исключение");
     }
 
-    @Description("Метод getFood. Список еды не должен быть null")
+    @Description("getFood должен вернуть список не null")
     @Test
     void getFoodDoesNotReturnsNullList() throws Exception {
         Cat cat = new Cat(felineMock);

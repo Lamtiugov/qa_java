@@ -27,8 +27,7 @@ public class LionAlexTests {
         }
     }
 
-    @Description("У Алекса три друга — зебра Марти, бегемотиха Глория и жираф Мелман." +
-            " Здесь же и проверка на непустой список")
+    @Description("У Алекса три друга — зебра Марти, бегемотиха Глория и жираф Мелман")
     @Test
     void getFriendsAlwaysReturnsPredefinedListOfFriends() throws Exception {
         LionAlex lionAlex = new LionAlex(feline);
