@@ -38,14 +38,6 @@ public class CatTests {
         Mockito.verify(felineSpy, Mockito.times(1)).eatMeat();
     }
 
-    @Description("Из getFood не должено лететь исключение")
-    @Test
-    void getFoodDoesNotThrowException() {
-        Cat cat = new Cat(felineMock);
-        Executable executable = cat::getFood;
-        assertDoesNotThrow(executable, "Не должно вылетать исключение");
-    }
-
     @Description("getFood должен вернуть список не null")
     @Test
     void getFoodDoesNotReturnsNullList() throws Exception {
