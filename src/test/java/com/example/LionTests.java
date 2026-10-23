@@ -20,9 +20,6 @@ import static org.junit.jupiter.api.Assertions.*;
 @ExtendWith(MockitoExtension.class)
 public class LionTests {
 
-    @Spy
-    private Feline felineSpy;
-
     @Mock
     private Feline felineMock;
 
@@ -53,12 +50,13 @@ public class LionTests {
         assertTrue(exceptionTrows,"Конструктор класса должен кидать исключение для поля sex == null");
     }
 
-    @Description("getKittens вызывает метод Feline.getKittens()")
+    @Description("getKittens вызывает метод Feline.getKittens(), который всегда возвращает 1")
     @Test
-    void getKittensCallsFelineGetKittensWithoutParams() throws Exception {
-        Lion lion = new Lion("Самец", this.felineSpy);
-        lion.getKittens();
-        Mockito.verify(this.felineSpy, Mockito.times(1)).getKittens();
+    void getKittensAlwaysReturnsOne() throws Exception {
+        Feline feline = new Feline();
+        Lion lion = new Lion("Самец", feline);
+        int actual = lion.getKittens();
+        assertEquals(1, actual, "getKittens всегда возвращает 1");
     }
 
     @Description("doesHaveMane должен возвращать значение поля hasMane")
@@ -68,14 +66,6 @@ public class LionTests {
         Lion lion = new Lion(sex, felineMock);
         boolean actualHasMane = lion.doesHaveMane();
         assertEquals(lion.hasMane, actualHasMane, "Ожидалось, что вернет значение поля hasMane");
-    }
-
-    @Description("getFood() на самом деле вызывает метод Feline::getFood()")
-    @Test
-    void getFoodCallsFelineGetFood() throws Exception {
-        Lion lion = new Lion("Самец", this.felineSpy);
-        lion.getFood();
-        Mockito.verify(this.felineSpy, Mockito.times(1)).getFood("Хищник");
     }
 
     @Description("getFood не должен выдавать исключение")
@@ -90,11 +80,12 @@ public class LionTests {
         }
     }
 
-    @Description("getFood должен вернуть не null")
+    @Description("Еда: Животные, Птицы, Рыба")
     @Test
-    void getFoodReturnsNotNullList() throws Exception {
-        Lion lion = new Lion("Самец", felineMock);
-        List<String> food = lion.getFood();
-        assertTrue(Objects.nonNull(food), "getFood должен вернуть не null");
+    void getFoodReturnsFixedList() throws Exception {
+        Feline feline = new Feline();
+        Lion lion = new Lion("Самец", feline);
+        List<String> foods = lion.getFood();
+        assertEquals(List.of("Животные", "Птицы", "Рыба"), foods, "getFood должен вернуть: Животные, Птицы, Рыба");
     }
 }
