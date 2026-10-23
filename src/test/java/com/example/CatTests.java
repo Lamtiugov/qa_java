@@ -38,11 +38,12 @@ public class CatTests {
         Mockito.verify(felineSpy, Mockito.times(1)).eatMeat();
     }
 
-    @Description("getFood должен вернуть список не null")
+    @Description("Еда: Животные, Птицы, Рыба")
     @Test
-    void getFoodDoesNotReturnsNullList() throws Exception {
-        Cat cat = new Cat(felineMock);
+    void getFoodReturnsFixedList() throws Exception {
+        Feline feline = new Feline();
+        Cat cat = new Cat(feline);
         List<String> foods = cat.getFood();
-        assertTrue(Objects.nonNull(foods), "Список еды не должен быть null");
+        assertEquals(List.of("Животные", "Птицы", "Рыба"), foods, "Список еды должен быть: Животные, Птицы, Рыба");
     }
 }
