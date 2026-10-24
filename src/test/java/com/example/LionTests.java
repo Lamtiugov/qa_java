@@ -87,10 +87,9 @@ public class LionTests {
         Mockito.when(felineMock.getFood("Хищник")).thenReturn(List.of("Животные", "Птицы", "Рыба"));
         List<String> foods = lion.getFood();
         assertEquals(List.of("Животные", "Птицы", "Рыба"), foods, "getFood должен вызывать Feline.getFood");
-
     }
 
-        @Description("Еда: Животные, Птицы, Рыба")
+    @Description("Еда: Животные, Птицы, Рыба")
     @Test
     void getFoodReturnsFixedList() throws Exception {
         Feline feline = new Feline();
