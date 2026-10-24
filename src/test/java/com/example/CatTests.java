@@ -29,7 +29,7 @@ public class CatTests {
     void getFoodCallsEatMeatFromFeline() throws Exception {
         Cat cat = new Cat(felineMock);
         Mockito.when(felineMock.eatMeat()).thenReturn(List.of("Животные", "Птицы", "Рыба"));
-        assertEquals(List.of("Животные", "Птицы", "Рыба"), cat.getFood(), "Стаб: Животные, Птицы, Рыба");
+        assertEquals(List.of("Животные", "Птицы", "Рыба"), cat.getFood(), "Ожидался вызов Feline.eatMeat");
     }
 
     @Description("Еда: Животные, Птицы, Рыба")
